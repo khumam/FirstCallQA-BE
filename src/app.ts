@@ -11,6 +11,7 @@ class App {
   constructor() {
     this.app = express();
     this.port = process.env.APP_PORT;
+    this.app.use(express.json());
     routeLoader(this.app);
   }
 

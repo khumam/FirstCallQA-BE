@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import dotenv from "dotenv"
 import routeLoader from "./loaders/route.loader";
 dotenv.config()
@@ -13,6 +13,13 @@ class App {
     this.port = process.env.APP_PORT;
     this.app.use(express.json());
     routeLoader(this.app);
+
+    this.app.use((req: Request, res: Response) => {
+      res.status(404).json({
+        status: 'Failed',
+        message: 'Not found!'
+      });
+    })
   }
 
   listen() {

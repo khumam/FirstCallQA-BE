@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import dotenv from "dotenv"
 import routeLoader from "./loaders/route.loader";
+import cors from "cors";
 dotenv.config()
 console.log(process.env)
 
@@ -12,6 +13,7 @@ class App {
     this.app = express();
     this.port = process.env.APP_PORT;
     this.app.use(express.json());
+    this.app.use(cors());
     routeLoader(this.app);
 
     this.app.use((req: Request, res: Response) => {
